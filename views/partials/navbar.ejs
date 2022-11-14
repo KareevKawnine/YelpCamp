@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="description" content="" />
+    <script src="themekit/scripts/jquery.min.js"></script>
+    <script src="themekit/scripts/main.js"></script>
+    <link rel="stylesheet" href="themekit/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="themekit/css/style.css" />
+    <link rel="stylesheet" href="themekit/css/glide.css" />
+    <link rel="stylesheet" href="themekit/css/magnific-popup.css" />
+    <link rel="stylesheet" href="themekit/css/content-box.css" />
+    <link rel="stylesheet" href="themekit/css/contact-form.css" />
+    <link rel="stylesheet" href="themekit/css/media-box.css" />
+    <link rel="stylesheet" href="skin.css" />
+    <link rel="icon" href="media/favicon.png" />
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"
+      crossorigin
+    ></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css"
+      rel="stylesheet"
+      crossorigin
+    />
+  </head>
+  <body class="page-main">
+    <div id="preloader"></div>
+    <nav
+      class="menu-classic menu-fixed menu-transparent light align-right"
+      data-menu-anima="fade-in"
+    >
+      <div class="container">
+        <div class="menu-brand">
+          <a href="#">
+            <img
+              class="logo-default scroll-hide"
+              src="media/main.png"
+              alt="logo"
+            />
+            <img class="logo-retina scroll-hide" src="media/1.png" alt="logo" />
+            <img
+              class="logo-default scroll-show"
+              src="media/1.png"
+              alt="logo"
+            />
+            <img class="logo-retina scroll-show" src="media/1.png" alt="logo" />
+          </a>
+        </div>
+        <i class="menu-btn"></i>
+        <div class="menu-cnt">
+          <ul id="main-menu">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li class="dropdown">
+              <a href="#">Explore</a>
+              <ul>
+                <li><a href="/campgrounds/new">Create Campground</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/campgrounds">Campgrounds</a>
+            </li>
+            <% if(!currentUser) {%>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            <li>
+              <a href="/register">Register</a>
+            </li>
+            <% } else {%>
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+            <% } %>
+          </ul>
+          <div class="menu-right">
+            <ul class="lan-menu">
+              <li class="dropdown">
+                <a href="#"><img src="media/en.png" />EN </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>

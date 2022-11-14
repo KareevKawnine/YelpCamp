@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[if lt IE 10]> <html  lang="en" class="iex"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<html lang="en">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= campground.title %> - YelpCamp</title>
+    <meta name="description" content="" />
+    <script src="/themekit/scripts/jquery.min.js"></script>
+    <script src="/themekit/scripts/main.js"></script>
+    <link rel="stylesheet" href="/themekit/css/bootstrap-grid.css" />
+    <link rel="stylesheet" href="/themekit/css/style.css" />
+    <link rel="stylesheet" href="/themekit/css/glide.css" />
+    <link rel="stylesheet" href="/themekit/css/magnific-popup.css" />
+    <link rel="stylesheet" href="/themekit/css/content-box.css" />
+    <link rel="stylesheet" href="/themekit/css/media-box.css" />
+    <link rel="stylesheet" href="/themekit/css/contact-form.css" />
+    <link rel="stylesheet" href="/skin.css" />
+    <link rel="icon" href="/media/favicon.png" />
+    <link rel="stylesheet" href="/css/stars.css">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+   
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="page-main">
+    <div id="preloader"></div>
+ 
+    <nav
+      class="menu-classic menu-fixed dark align-right"
+      data-menu-anima="fade-in"
+    >
+      <div class="container">
+        <div class="menu-brand">
+          <a href="#">
+            <img
+              class="logo-default scroll-hide"
+              src="/media/6.png"
+              alt="logo"
+            />
+            <img class="logo-retina scroll-hide" src="/media/1.png" alt="logo" />
+            <img
+              class="logo-default scroll-show"
+              src="/media/1.png"
+              alt="logo"
+            />
+            <img class="logo-retina scroll-show" src="/media/1.png" alt="logo" />
+          </a>
+        </div>
+        <i class="menu-btn"></i>
+        <div class="menu-cnt">
+          <ul id="main-menu">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li class="dropdown">
+              <a href="#">Explore</a>
+              <ul>
+                <li><a href="/campgrounds/new">Create Campground</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/campgrounds">Campgrounds</a>
+            </li>
+            <% if(!currentUser) {%>
+            <li>
+              <a href="/login">Login</a>
+            </li>
+            <li>
+              <a href="/register">Register</a>
+            </li>
+            <% } else {%>
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+            <% } %>
+          </ul>
+          <div class="menu-right">
+            <ul class="lan-menu">
+              <li class="dropdown">
+                <a href="#"><img src="/media/en.png" />EN </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header
+      class="header-image ken-burn-center light"
+      data-parallax="true"
+      data-natural-height="1080"
+      data-natural-width="1920"
+      data-bleed="0"
+      data-image-src="<%=campground.images[0].url%>" "
+      data-offset="0"
+    >
+      <div class="container">
+        <h1><%= campground.title %> </h1>
+        <h2>Talent wins games, but teamwork win championships</h2>
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="/campgrounds">Campgrounds</a></li>
+          <li><a href="/campgrounds/<%=campground._id%>"><%= campground.title %> </a></li>
+        </ol>
+      </div>
+    </header>
+    <main>
+      <section class="section-base">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <ul
+              class="slider"
+              data-options="type:carousel,nav:true,perView:1,perViewLg:1,perViewSm:1,gap:30,controls:out" 
+            >
+            <% campground.images.forEach((img, i) => {  %>
+              <li>
+                <a
+                  class="img-box lightbox"
+                  href="<%= img.url%>"
+                  data-lightbox-anima="fade-top"
+                >
+                  <img
+                    src="<%= img.url%>"
+                    alt=""
+                  />
+                </a>
+              </li>
+              <% }) %> 
+            </ul>
+              <hr class="space-sm" />
+              <hr class="space-xs" />
+              <%  if( currentUser && campground.author.equals(currentUser._id))  {%>
+              <a href="/campgrounds/<%=campground._id%>/edit">
+                <button type="submit" style="margin-right: 80px; margin-bottom: 10px" class="btn btn-sm btn-circle"
+                  >Edit Campground</button
+                ></a>
+              
+              <form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-sm btn-circle"
+                >Delete Campground</button
+              >
+            </form>
+            <% } %> 
+            </div>
+            <div class="col-lg-6">
+              <div class="cnt-box cnt-box-side">
+                <a href="#" class="img-box"
+                  ><img src="/media/verified.png" alt=""
+                /></a>
+                <div class="caption">
+                  <h2><%= campground.title %> </h2>
+                  <span class="extra-field">By <%= campground.author.username %> </span>
+                  <p>
+                   <%= campground.location %> 
+                  </p>
+                </div>
+              </div>
+              <hr class="space-sm" />
+              
+              
+              
+              <hr class="space-sm" />
+              <table
+                class="table table-grid table-border align-left text-bold table-10"
+              >
+                <tbody>
+                  <tr>
+                    <td>
+                      Nationality
+                      <p>English</p>
+                    </td>
+                    <td>
+                      Languages
+                      <p>English</p>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section-image light"
+        data-parallax="scroll"
+        data-bleed="100"
+        data-image-src="<%=campground.images[0].url%>""
+      >
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="counter counter-vertical counter-icon">
+                <div>
+                  <h3>Author</h3>
+                  <p class="text-50 text-black no-margin">Verified</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div>
+                <h3>Distance</h3>
+                <p class="text-50 text-black no-margin">N/A</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div>
+                <h3>Group size</h3>
+                <p class="text-50 text-black no-margin">10</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div>
+                <h3>Difficulty</h3>
+                <p class="text-50 text-black no-margin">Normal </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-base">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1>Starting at <%= campground.price %>$ / Day </h1>
+              <p>
+                <%= campground.description %> 
+              </p>
+            </div>
+            <div class="col-lg-6">
+              <ul class="text-list text-list-line">
+               
+                <li>
+                  <b>Address</b>
+                  <hr />
+                  <p><%= campground.location %> </p>
+                </li>
+                <li>
+                  <b>Area</b>
+                  <hr />
+                  <p>See From Map</p>
+                </li>
+                <li>
+                  <b>Refuges</b>
+                  <hr />
+                  <p>All</p>
+                </li>
+                <li>
+                  <b>Facilities</b>
+                  <hr />
+                  <p>All types</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <hr class="space" />
+        </div>
+      </section>
+      <section class="section-base section-color section-google-map">
+        <div class="container">
+          <div
+            class="google-map"
+            id="map"
+            
+          ></div>
+          <div class="row">
+            <div class="col-lg-6">
+              <table class="table table-columns">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div
+                        class="progress-circle light text-black"
+                        data-color="green"
+                        data-thickness="6"
+                        data-progress="100"
+                        data-size="85"
+                        data-size-md="85"
+                        data-linecap="round"
+                      ></div>
+                    </td>
+                    <td>
+                      <h3>Normal Difficulty</h3>
+                      <p class="no-margin">
+                       YelpCamp provide Campgrounds which are suitable for all kinds of people.
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr class="space-sm" />
+              <hr class="space-xs" />
+             
+            </div>
+            <div class="col-lg-6" >
+              <table class="table table-border table-alpins" >
+                <thead>
+                  <tr>
+                    <th> Campground Id</th>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr >
+                    <td ><%= campground._id %></td>
+                    <td><%= campground.location %></td>
+                  </tr>
+                 
+                </tbody>
+              </table>
+              
+            </div>
+              
+          </div>
+          
+          <h2>Leave a Review</h2>
+          <%  if( !currentUser)  {%>
+            <h4>You must create an account to leave a Review. Already an user? <a href="/login">Login instead</a></h4>
+            <% } %> 
+          <hr class="space-sm">
+          <% if(currentUser){ %>
+            <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+                <!-- <div class="mb-3">
+                    <label class="form-label" for="rating">Rating</label>
+                    <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+                </div> -->
+                <fieldset class="starability-heart">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+                        aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+                <div class="mb-3">
+                    <label class="form-label" for="body">Write Your Review</label>
+                    <textarea class="form-control input-text" id="messagge" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                </div>
+                <button class="btn btn-xs">Submit</button>
+            </form>
+            <% } %>
+            <hr class="space-sm">
+          <% for(let review of campground.reviews) { %>
+            <div class="cnt-box cnt-call" style="margin-bottom: 30px">
+              <i class="im-paper-plane"></i>
+              <div class="caption">
+                  <h2>Rated: <%= review.rating %> stars</h2>               
+                  <p class="starability-result" data-rating="<%=review.rating%>">
+                </p>
+                <h3>By <%= review.author.username%></h3>
+                  <p>
+                    <%= review.body %>
+                  </p>
+                  <%  if( currentUser && review.author.equals(currentUser._id))  {%>
+                  <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-xs">Delete</button>
+                    </form>
+                    <% } %> 
+                  </div> 
+          </div>
+                    <% } %>
+        </div>
+        
+      </section>
+      
+    </main>
+    <footer class="light">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <a href="/"><img src="/media/1.png" width="50%" alt="" /></a>
+          </div>
+          <!-- <div class="col-lg-4">
+              <h3>Contacts</h3>
+              <ul class="icon-list icon-line">
+                <li>Dhaka, Bangladesh</li>
+                <li>kareevkawnine@gmail.com</li>
+              </ul>
+            </div>
+            <div class="col-lg-4">
+              <div class="icon-links icon-social icon-links-grid social-colors">
+                <a class="facebook" href="http://www.facebook.com/kareevkawnine"
+                  ><i class="icon-facebook"></i
+                ></a>
+                <a class="twitter" href="http://www.twitter.com/kareevkaw9"
+                  ><i class="icon-twitter"></i
+                ></a>
+                <a
+                  class="instagram"
+                  href="http://www.instagram.com/kareev_kawnine"
+                  ><i class="icon-instagram"></i
+                ></a>
+              </div>
+              <hr class="space-sm" />
+              <p>Make Sure To Follow me on GitHub For More Projects</p>
+            </div> -->
+        </div>
+      </div>
+      <div class="footer-bar">
+        <div class="container">
+          <span
+            >© 2022 YelpCamp - The Ultimate Version 2.0 by
+            <a href="https://github.com/kareevkawnine" target="_blank"
+              >KareevKawnine</a
+            >.</span
+          >
+          <span
+            ><a href="https://github.com/kareevkawnine">Contact Developer</a> |
+            <a href="">Privacy policy</a></span
+          >
+        </div>
+      </div>
+      <link
+        rel="stylesheet"
+        href="/themekit/media/icons/iconsmind/line-icons.min.css"
+      />
+      <script src="/themekit/scripts/parallax.min.js"></script>
+      <script src="/themekit/scripts/glide.min.js"></script>
+      <script src="/themekit/scripts/progress.js"></script>
+      <script src="/themekit/scripts/magnific-popup.min.js"></script>
+      <script src="/themekit/scripts/imagesloaded.min.js"></script>
+      <script src="/themekit/scripts/maps.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDl7p8SWg-5kLe7i-usdYCu5m3eVllMDTs"></script>
+      <script src="/js/validateForms.js"></script>
+      <script>
+            const campground = <%- JSON.stringify(campground) %>
+            const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+        mapboxgl.accessToken =  mapToken;
+const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v10', // stylesheet location
+    center: campground.geometry.coordinates, // starting position [lng, lat]
+    zoom: 10 ,// starting zoom
+});
+
+map.addControl(new mapboxgl.NavigationControl());
+
+
+new mapboxgl.Marker()
+    .setLngLat(campground.geometry.coordinates)
+    .setPopup(
+        new mapboxgl.Popup({ offset: 25 })
+            .setHTML(
+                `<h3>${campground.title}</h3><p>${campground.location}</p>`
+            )
+    )
+    .addTo(map)
+      </script>
+    </footer>
+  </body>
+</html>

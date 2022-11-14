@@ -1,0 +1,399 @@
+<%- include('./partials/navbar.ejs') %>
+<title>Welcome - YelpCamp</title>
+<main>
+  <section
+    class="section-image section-full-width-right light ken-burn-center"
+    data-parallax="scroll"
+    data-image-src="showcase/3_gt0ejg.jpg"
+  >
+    <div class="container">
+      <hr class="space-lg" />
+      <hr class="space-sm" />
+      <div class="row">
+        <div class="col-lg-6">
+          <h1
+            data-anima="fade-left"
+            data-time="2000"
+            class="text-lg text-uppercase text-black"
+          >
+            Welcome To YelpCamp
+          </h1>
+          <hr class="space-lg" />
+          <hr class="space-sm hidden-lg" />
+          <ul class="slider width-50" data-options="type:slider,perView:1">
+            <li>
+              <p class="quote">
+                Do not follow where the path may lead. Go instead where there is
+                no path and leave a trail.
+                <span class="quote-author">Ralph Emerson</span>
+              </p>
+            </li>
+            <li>
+              <p class="quote">
+                When everything feels like an uphill struggle. Just wait and
+                think of the view from the top.
+                <span class="quote-author">Wislawa Symborska</span>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <hr class="space-xs" />
+          <div class="counter counter-vertical counter-icon">
+            <div>
+              <h3>Altitude</h3>
+              <div class="value">
+                <span class="text-md" data-to="1650" data-speed="5000"
+                  >1650</span
+                >
+                <span>m</span>
+              </div>
+            </div>
+          </div>
+          <hr class="space-sm" />
+          <div class="counter counter-vertical counter-icon">
+            <div>
+              <h3>Campgrounds</h3>
+              <div class="value">
+                <span class="text-md" data-to="500" data-speed="5000">7</span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <hr class="space-sm" />
+          <div class="counter counter-vertical counter-icon">
+            <div>
+              <h3>Tourists / year</h3>
+              <div class="value">
+                <span class="text-md" data-to="2000" data-speed="5000"
+                  >2000</span
+                >
+                <span>+</span>
+              </div>
+            </div>
+          </div>
+          <hr class="space" />
+          <ul
+            class="slider"
+            data-options="type:carousel,nav:true,perView:3,perViewLg:2,perViewSm:1,gap:30,controls:out,autoplay:3000"
+          >
+            <li>
+              <a
+                class="img-box btn-video lightbox"
+                href="https://www.youtube.com/watch?v=AUSPpTVt2sI"
+                data-lightbox-anima="fade-top"
+              >
+                <img src="showcase/2_hje8ev.jpg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a
+                class="img-box lightbox"
+                href="showcase/5_kpwc1p.jpg"
+                data-lightbox-anima="fade-top"
+              >
+                <img src="showcase/5_kpwc1p.jpg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a
+                class="img-box lightbox"
+                href="showcase/12_bq0nfv.jpg"
+                data-lightbox-anima="fade-top"
+              >
+                <img src="showcase/12_bq0nfv.jpg" alt="" />
+              </a>
+            </li>
+            <li>
+              <a
+                class="img-box lightbox"
+                href="showcase/6_ymtmzw.jpg"
+                data-lightbox-anima="fade-top"
+              >
+                <img src="showcase/6_ymtmzw.jpg" alt="" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr class="space-lg" />
+    </div>
+  </section>
+  <section class="section-base">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <ul
+            class="slider controls-right"
+            data-options="type:carousel,nav:true,perView:2,perViewSm:1,gap:30,controls:out"
+          >
+            <% for (let campground of campgrounds) { %>
+            <li>
+              <div
+                class="cnt-box cnt-box-info"
+                data-href="/campgrounds/<%= campground._id %> "
+              >
+                <div class="extra-field">From <%= campground.price %>$</div>
+                <a href="/campgrounds/<%= campground._id %>" class="img-box"
+                  ><img
+                    src="<%=campground.images && campground.images.length ? campground.images[0].url : ''  %>"
+                    alt=""
+                /></a>
+                <div class="caption">
+                  <h2><%= campground.title %></h2>
+                  <div class="cnt-info">
+                    <div><span>Days</span><span>3</span></div>
+                    <div><span>Group size</span><span>10</span></div>
+                    <div><span>Difficulty</span><span>Easy</span></div>
+                  </div>
+                  <p><%= campground.description %></p>
+                  <div class="bottom-info"><%= campground.location %></div>
+                </div>
+              </div>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <hr class="space-sm visible-sm" />
+          <div class="title">
+            <h2>Latest campgrounds</h2>
+            <p>Explore the unexplored campgrounds</p>
+          </div>
+          <p>
+            Get Started with our brand new YelpCamp 2.0. Unleash all campgrounds
+            and features
+          </p>
+          <a href="/register" class="btn btn-circle btn-xs">Join us now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-base section-color">
+    <div class="container">
+      <div class="title align-center align-left-md">
+        <h2>About us</h2>
+        <p>We live for the nature</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <p>
+            Explore all the campgrounds from our web app. Create your own
+            campground and customize it. Let the campground be live and people
+            to rate your campground. Get Started!
+          </p>
+        </div>
+        <div class="col-lg-3 no-margin-md">
+          <p>
+            YelpCamp 2.0 is built using the greatest and modern technologies for
+            building CRUD Web Applications inspired from Colt Steele. Learn more
+            about the project from my GitHub repository
+          </p>
+          <hr class="space-sm" />
+          <a
+            href="https://github.com/kareevkawnine"
+            target="_blank"
+            class="btn-text"
+            >Get Started</a
+          >
+        </div>
+        <div class="col-lg-6">
+          <ul class="accordion-list" data-open="1">
+            <li>
+              <a href="#">Our mountains and Our location</a>
+              <div class="content">
+                <p>
+                  Most of our campgrounds are situated in USA and outside USA.
+                  You can add your own location from the app and explore with
+                  our latest technology navigation from
+                  <a href="https://www.mapbox.com/">MapBox</a>
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#">About YelpCamp 2.0 Developer</a>
+              <div class="content">
+                <p>
+                  YelpCamp 2.0 is developed by Kareev Kawnine inspired from Colt
+                  Steele's most renowned CRUD Web App YelpCamp. Click
+                  <a href="https://github.com/kareevkawnine">here</a> to learn
+                  more about developer and project.
+                </p>
+              </div>
+            </li>
+            <li>
+              <a href="#">About uploading images for Campgrounds</a>
+              <div class="content">
+                <p>
+                  We always make sure our users provide free of copyright images
+                  and the images that our users owns according to our privacy
+                  policy.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section
+    class="section-slider alpins-slider light section-full-width-left"
+    data-slider-parallax="true"
+    data-interval="0"
+  >
+    <div class="background-slider">
+      <div
+        class="active"
+        style="background-image: url(showcase/9_bkchx2.jpg)"
+      ></div>
+      <div
+        style="
+          background-image: url(showcase/zach-betten-K9olx8OF36A-unsplash_wylebk.jpg);
+        "
+      ></div>
+      <div
+        style="
+          background-image: url(showcase/chris-holder-uY2UIyO5o5c-unsplash_vtoiwu.jpg);
+        "
+      ></div>
+      <div
+        style="
+          background-image: url(showcase/michael-DXQB5D1njMY-unsplash_d9zvpo.jpg);
+        "
+      ></div>
+      <div
+        style="
+          background-image: url(showcase/jordan-heinrichs--ZUDQZOQ3Aw-unsplash_jnjqux.jpg);
+        "
+      ></div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <ul
+            class="slider"
+            data-options="type:slider,nav:true,arrows:true,perView:3,perViewLg:2,perViewSm:1,gap:30,controls:out"
+          >
+            <% for (let campground of campgrounds) { %>
+            <li>
+              <a
+                href="/campgrounds/<%= campground._id %>"
+                class="media-box media-box-reveal"
+                data-anima="scale"
+                data-trigger="hover"
+              >
+                <img class="anima" src="media/new.png" alt="" />
+                <div class="caption">
+                  <h2><%= campground.title %></h2>
+                  <div class="extra-field">From $<%= campground.price %></div>
+                  <h3><%=campground.location %></h3>
+                  <p><%=campground.description%></p>
+                </div>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="col-lg-6" data-anima="fade-left" data-time="2000">
+          <h1 class="text-lg text-uppercase text-black">
+            The Campground of Yours
+          </h1>
+          <a href="/campgrounds" class="btn btn-sm btn-circle"
+            >All Campgrounds</a
+          >
+          <a href="/login" class="btn btn-sm btn-circle btn-border">Login</a>
+          <hr class="space hidden-md" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-base">
+    <div class="container">
+      <div class="title align-center">
+        <h2>Top Services On YelpCamp</h2>
+        <p>Best Campgrounds ever created!</p>
+      </div>
+      <table class="table table-grid table-border table-6-md">
+        <tbody>
+          <tr>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-foot-2"></i>
+                <div class="caption">
+                  <h3>Experienced team</h3>
+                  <p>We always lived inside our amazing nature</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-icq"></i>
+                <div class="caption">
+                  <h3>Easy joining</h3>
+                  <p>Register and Create Your Own</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-landscape"></i>
+                <div class="caption">
+                  <h3>Expert hikers</h3>
+                  <p>Our campground teached us everything we know</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-forest"></i>
+                <div class="caption">
+                  <h3>Secret locations</h3>
+                  <p>Discover hidden natural places with our campgrounds</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-flag-4"></i>
+                <div class="caption">
+                  <h3>Europe locations</h3>
+                  <p>We provide trips on various countries</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-map2"></i>
+                <div class="caption">
+                  <h3>Visit Campground</h3>
+                  <p>Get the geolocation from each campground</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-globe"></i>
+                <div class="caption">
+                  <h3>United States</h3>
+                  <p>Once a year join us to the other part of the world</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="icon-box icon-box-top align-center">
+                <i class="im-rainbow-2"></i>
+                <div class="caption">
+                  <h3>Great waterfall</h3>
+                  <p>Our excursions will bring you to great waterfalls</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<%- include('./partials/footer.ejs') %>
