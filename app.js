@@ -20,7 +20,8 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const MongoStore = require("connect-mongo");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp";
-module.exports = app;
+const app = express();
+
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -29,7 +30,7 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
-const app = express();
+module.exports = app;
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
