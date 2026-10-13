@@ -19,14 +19,9 @@ const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const MongoStore = require("connect-mongo");
-const dbUrl =
-  process.env.DB_URL ||
-  (process.env.NODE_ENV === "production"
-    ? null
-    : "mongodb://localhost:27017/yelp-camp");
-if (!dbUrl) {
-  throw new Error("Missing DB_URL. Set DB_URL to a reachable MongoDB connection string in Vercel.");
-}
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
+mongoose.connect(dbUrl);
+
 const app = express();
 
 mongoose.connect(dbUrl);
@@ -115,7 +110,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-// const port = process.env.PORT || 3000;
-// app.listen(port, () => {
-//   console.log(`Serving on port ${port}`);
-// });
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+console.log(`Serving on port ${port}`)
+});
